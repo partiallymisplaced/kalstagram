@@ -2,9 +2,11 @@
 const express = require('express');
 const router = express.Router();
 
+// Bcrypt.js
+const bcrypt = require('bcryptjs');
+
 // Imports User model
 const User = require('../../modules/User');
-
 
 // Test route
 router.get('/test', 
@@ -20,7 +22,7 @@ router.get('/test',
 // Check if user exists by email. 
 // TODO:    Check if user exists by email, username or password
 router.post('/signup', (req, res) => {
-    User.findone({email: req.body.email})
+    User.findOne({email: req.body.email})
         .then(user => {
             if(user){
                 return res.status(400).json({
@@ -33,7 +35,19 @@ router.post('/signup', (req, res) => {
                     fullName: req.body.fullName,
                     username: req.body.username,
                     password: req.body.password
-                })
+                });
+            
+                bcrypt.genSalt(20, (err, salt) => {
+                    if (err) throw err;
+                    bcrypt.hash(newUser.password, salt, 
+                        (err, hash) => {
+                            if (err) throw err;
+                            newUser.password = hash;
+                            newUser.save()
+                                .then(user => res.json(user))
+                                .catch(err => console.log(err));
+                        }) 
+                });
 
             }
         });
