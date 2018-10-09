@@ -6,10 +6,14 @@ const app = express();
 const mongoose = require('mongoose');
 const db = require('./keys').mongoURI;
 
+// Body-parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // Routes
 const users = require('./routes/api/users');
 
-// App
 app.use('/api/users', users);
 
 
