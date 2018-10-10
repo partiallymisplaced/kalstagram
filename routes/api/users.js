@@ -37,7 +37,7 @@ router.post('/signup', (req, res) => {
                     password: req.body.password
                 });
             
-                bcrypt.genSalt(20, (err, salt) => {
+                bcrypt.genSalt(10, (err, salt) => {
                     if (err) throw err;
                     bcrypt.hash(newUser.password, salt, 
                         (err, hash) => {
@@ -52,5 +52,12 @@ router.post('/signup', (req, res) => {
             }
         });
 })
+
+// @route   POST api/users/login
+// @desc    Enables user login
+// @access  Public
+
+
+
 
 module.exports = router;
