@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 // App User schema
 const UserSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
@@ -14,10 +18,6 @@ const UserSchema = new Schema({
     },
     fullName: {
         type: String,
-    },
-    username: {
-        type: String,
-        required: true
     },
     password: {
         type: String,

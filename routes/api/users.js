@@ -19,14 +19,14 @@ router.get('/test',
 // @desc    Enables user signup
 // @access  Public
 
-// Check if user exists by email. 
+// Checks if user exists by email. 
 // TODO:    Check if user exists by email, username or password
 router.post('/signup', (req, res) => {
-    User.findOne({email: req.body.email})
+    User.findOne({username: req.body.username})
         .then(user => {
             if(user){
                 return res.status(400).json({
-                    email: "A user with this email already exists."
+                    username: "Username is already taken."
                 })
             } else {
                 const newUser = new User({
