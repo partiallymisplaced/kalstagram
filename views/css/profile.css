@@ -1,0 +1,14 @@
+body{
+    background-color: #999;
+}
+h1{
+    color: white;
+}
+
+header nav a{    
+    margin-right: 10px;
+    text-decoration: none;
+    background-color: #ecc;
+    padding: 10px;
+    float: right;
+}
